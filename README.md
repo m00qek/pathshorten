@@ -1,4 +1,4 @@
-#pathshorten
+# pathshorten
 
 A smaller representation of a full filepath.
 
@@ -14,16 +14,16 @@ export PS1='$(pathshorten -s $PWD) \$ '
 
 It works similarly to the function `pathshorten` in `vim`: it shows the first
 letter of each directory of the path, except the latest one. For example, if
-your `$HOME` directory is `/home/myuser` and you are trying to shorten the path
-of a symlink directory at `/home/myuser/projects/pathshorten`, you have the 
+your `$HOME` directory is `/home/quincas` and you are trying to shorten the path
+of a symlink directory at `/home/quincas/.theories/humanitas`, you have the 
 following options:
 
 |                       command                       |         result        |
 | --------------------------------------------------- | --------------------- |
-| `pathshorten /home/myuser/projects/pathshorten`     | `~/p/pathshorten`     |
-| `pathshorten -s /home/myuser/projects/pathshorten`  | `~/p/pathshorten@`    |
-| `pathshorten -a /home/myuser/projects/pathshorten`  | `/h/m/p/pathshorten`  |
-| `pathshorten -sa /home/myuser/projects/pathshorten` | `/h/m/p/pathshorten@` |
+| `pathshorten /home/quincas/.theories/humanitas`     | `~/.t/humanitas`      |
+| `pathshorten -s /home/quincas/.theories/humanitas`  | `~/.t/humanitas@`     |
+| `pathshorten -a /home/quincas/.theories/humanitas`  | `/h/q/.t/humanitas`   |
+| `pathshorten -sa /home/quincas/.theories/humanitas` | `/h/q/.t/humanitas@`  |
 
 ### API
 

@@ -40,7 +40,7 @@ func shortname(text string) string {
 	return string(runes[0])
 }
 
-func isSymlink(home string, directory string) bool {
+var isSymlink = func(home string, directory string) bool {
 	fileInfo, err := os.Lstat(absoluteHome(home, directory))
 	if nil != err {
 		return false
