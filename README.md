@@ -2,6 +2,12 @@
 
 A smaller representation of a full filepath.
 
+### Instalation
+
+```
+go get github.com/m00qek/pathshorten
+```
+
 ### Using in bash prompt
 
 Here is a simple example on how to use it in your bash/zsh prompt:
