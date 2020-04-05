@@ -31,13 +31,19 @@ func main() {
 	dirpath, _ := args.String("<path>")
 
 	home, err := homedir()
-	if nil != err {
+	if nil == err {
+		couldNotGetHomedirError()
 		return
 	}
 
+	path := symbolicHome(home, dirpath)
 	if useAbsolutePath {
-		fmt.Println(pathshorten(home, absoluteHome(home, dirpath), showSymlinks))
-	} else {
-		fmt.Println(pathshorten(home, symbolicHome(home, dirpath), showSymlinks))
+		path = absoluteHome(home, dirpath)
 	}
+
+	predicate := func(home string, directory string) bool {
+		return showSymlinks && isSymlink(home, directory)
+	}
+
+	fmt.Println(pathshorten(home, path, predicate))
 }

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-	"os/user"
 	"path"
 	"path/filepath"
 	"strings"
@@ -12,15 +10,6 @@ const SEPARATOR = string(filepath.Separator)
 const ROOT = string(filepath.Separator)
 const SYMLINK = "@"
 const HOME = "~"
-
-func homedir() (string, error) {
-	user, err := user.Current()
-	if nil != err {
-		return "", err
-	}
-
-	return user.HomeDir, nil
-}
 
 func symbolicHome(home string, dirpath string) string {
 	return strings.Replace(dirpath, home, HOME, 1)
@@ -40,15 +29,6 @@ func shortname(text string) string {
 	return string(runes[0])
 }
 
-var isSymlink = func(home string, directory string) bool {
-	fileInfo, err := os.Lstat(absoluteHome(home, directory))
-	if nil != err {
-		return false
-	}
-
-	return fileInfo.Mode()&os.ModeSymlink > 0
-}
-
 func splitPath(dirpath string) []string {
 	newPath := []string{}
 	for _, dir := range strings.Split(dirpath, SEPARATOR) {
@@ -60,7 +40,7 @@ func splitPath(dirpath string) []string {
 	return newPath
 }
 
-func pathshorten(home string, dirpath string, symlinks bool) string {
+func pathshorten(home string, dirpath string, isSymlink SymlinkPredicate) string {
 	if dirpath == ROOT || len(dirpath) == 0 {
 		return ROOT
 	}
@@ -80,7 +60,7 @@ func pathshorten(home string, dirpath string, symlinks bool) string {
 			directory = shortname(directory)
 		}
 
-		if symlinks && isSymlink(home, normalpath) {
+		if isSymlink(home, normalpath) {
 			directory += SYMLINK
 		}
 
