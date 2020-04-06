@@ -13,7 +13,7 @@ go get github.com/m00qek/pathshorten
 Here is a simple example on how to use it in your bash/zsh prompt:
 
 ```sh
-export PS1='$(pathshorten -s $PWD) \$ '
+export PS1='$(pathshorten -s "$PWD") \$ '
 ```
 
 ### How it works?
