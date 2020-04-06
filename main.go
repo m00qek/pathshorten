@@ -31,7 +31,7 @@ func main() {
 	dirpath, _ := args.String("<path>")
 
 	home, err := homedir()
-	if nil == err {
+	if nil != err {
 		couldNotGetHomedirError()
 		return
 	}
